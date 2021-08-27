@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+const path = require("path");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
 const { connect } = require("mongoose");
@@ -18,6 +19,8 @@ connectDB();
 app.engine(".hbs", hbs({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", ".hbs");
 
+//static files
+app.use(express.static(path.join(__dirname, "public")));
 //routes
 app.use("/", require("./routes/index"));
 
